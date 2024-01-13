@@ -1,0 +1,33 @@
+# docker-compose.yml
+version: '3' # can only be 2 or 3
+services: # Defines two services: db and api
+  db:
+    container_name: pictures_db   # Names the Docker container
+    image: pictures_db:latest     # Uses the latest Docker image
+    build: ./pictures_db/         # Specifies the location of 
+    restart: always               # Restarts the container if it fails and it helps to control its state
+    environment:                  # Sets environment variables
+      MYSQL_DATABASE: Pictures    # Name of the database
+      MYSQL_ROOT_PASSWORD: mbit   # Password for the root user
+      MYSQL_USER: mbit            # Username for the non-root user
+      MYSQL_PASSWORD: mbit        # Password for the non-root user
+    volumes:                      # Mounts the volume otherwise the database is not permanent
+      - db_data:/var/lib/mysql    # Mounts the volume to store the database
+      - ./pictures_db/setup.sql:/docker-entrypoint-initdb.d/setup.sql    # Mounts the volume to instantiate the database
+  api:
+    container_name: pictures_api  # Names the Docker container
+    image: pictures_api:latest    # Uses the latest image for the api
+    build: ./pictures_api/        # Specifies the location of the file
+    ports:                        
+      - "80:80"                   # Exposes the port 80 of the container to the port 80 of the host (careful with waitress)
+    volumes:
+      - images:/app/images        # Mounts the volume to store the images as requested
+    environment:                  # Sets environment variables
+      DB_HOST: db                 # Name of the database host or it will not connect
+      DB_USER: mbit               # Username for user (external)
+      DB_PASSWORD: mbit           # Password for user (external)
+      DB_NAME: Pictures           # Name of the database
+volumes:                          # Defines the volumes
+  db_data: {}                     # Creates a volume for the database
+  images: {}                      # Creates a volume for the api    
+

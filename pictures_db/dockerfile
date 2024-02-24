@@ -1,17 +1,4 @@
 FROM mysql:8.0
 
-# Set environment variables
-# Set the MySQL database name
-ENV MYSQL_DATABASE Pictures
-
-# Set the environment variable for the user
-ENV MYSQL_USER mbit
-
-# Set the user's password
-ENV MYSQL_PASSWORD mbit
-
-# Set the root user's password
-ENV MYSQL_ROOT_PASSWORD root
-
 # Add the setup.sql to setup the "Pictures" database 
 ADD setup.sql /docker-entrypoint-initdb.d

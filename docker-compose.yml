@@ -7,10 +7,10 @@ services: # Defines two services: db and api
     build: ./pictures_db/         # Specifies the location of 
     restart: always               # Restarts the container if it fails and it helps to control its state
     environment:                  # Sets environment variables
-      MYSQL_DATABASE: Pictures    # Name of the database
-      MYSQL_ROOT_PASSWORD: mbit   # Password for the root user
-      MYSQL_USER: mbit            # Username for the non-root user
-      MYSQL_PASSWORD: mbit        # Password for the non-root user
+      MYSQL_DATABASE: ${MYSQL_DATABASE}    # Name of the database
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}   # Password for the root user
+      MYSQL_USER: ${MYSQL_USER}            # Username for the non-root user
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}    # Password for the non-root user
     volumes:                      # Mounts the volume otherwise the database is not permanent
       - db_data:/var/lib/mysql    # Mounts the volume to store the database
       - ./pictures_db/setup.sql:/docker-entrypoint-initdb.d/setup.sql    # Mounts the volume to instantiate the database
@@ -23,10 +23,10 @@ services: # Defines two services: db and api
     volumes:
       - images:/app/images        # Mounts the volume to store the images as requested
     environment:                  # Sets environment variables
-      DB_HOST: db                 # Name of the database host or it will not connect
-      DB_USER: mbit               # Username for user (external)
-      DB_PASSWORD: mbit           # Password for user (external)
-      DB_NAME: Pictures           # Name of the database
+      DB_HOST: ${DB_HOST}         # Name of the database host or it will not connect
+      DB_USER: ${DB_USER}         # Username for user (external)
+      DB_PASSWORD: ${DB_PASSWORD} # Password for user (external)
+      DB_NAME: ${DB_NAME}
 volumes:                          # Defines the volumes
   db_data: {}                     # Creates a volume for the database
   images: {}                      # Creates a volume for the api    

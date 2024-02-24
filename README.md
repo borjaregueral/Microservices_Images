@@ -2,6 +2,7 @@
 
 ![Optional Alt Text](https://assets-global.website-files.com/643067b6b03b847eb9c418d0/648b215d9d6638f9da99b7a6_62f6bc9d4666f0a23ca506d4_tag_hero_preview.png)
 
+Source: Photo from [Use Tags to Add Metadata to Services and Repositories](https://www.opslevel.com/resources/use-tags-to-add-metadata-to-services)
 ## Description
 
 The aim of this project is to collect, tag and store images that can be retrieved through a simple request using an MVC (Model-View-Controller) architecture for the API. The tagging of the images happens using Immaga. The images have to be given a public url endpoint so that they can be uploaded into Immaga for them to be tagged. As a default, tagging has been given an 80% confidence although it is a parameter that can be changed. Once the image is tagged, the endpoint from Imagekit is deleted and the endpoint stored in a relational database. Once tagged, the tags, date and unique id os the pictures are updated on the database. In this case, the normal form of the relational database is "broken" so that the user can access all the tags that have been attached to the image. The data in which the image has been uploaded is kept for further query either by date, tag, picture name or by picture id.
